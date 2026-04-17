@@ -62,5 +62,16 @@
 }
 
 .button {
-  margin-top: auto;
+  font-size: 1.125rem;
+  border-style: none;
+  height: 30px;
+  border-radius: 50px;
+  margin: 10px;
+  padding: 0 20px;
+  background-color: #00dddd;
+}
+
+.button:disabled {
+  background-color: lightgrey;
+  color: black;
 }
