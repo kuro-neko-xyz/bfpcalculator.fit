@@ -90,21 +90,22 @@ function App() {
             }}
           />
         </div>
-        <button
-          className="button"
-          onClick={() => {
-            setBFP(
-              calculateBFP({
-                waist: Number(waist),
-                neck: Number(neck),
-                height: Number(height),
-              }),
-            );
-          }}
-        >
-          Calculate
-        </button>
       </div>
+      <button
+        className="button"
+        disabled={waist === "" || neck === "" || height === "" || neck >= waist}
+        onClick={() => {
+          setBFP(
+            calculateBFP({
+              waist: Number(waist),
+              neck: Number(neck),
+              height: Number(height),
+            }),
+          );
+        }}
+      >
+        Calculate
+      </button>
       {bfp > 0 && <p>BFP: {Math.round(bfp * 10) / 10}</p>}
     </div>
   );
