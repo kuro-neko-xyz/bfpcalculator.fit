@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.background {
+  background-color: lime;
+  height: 30px;
+  width: 60px;
+  border-radius: 50px;
+  margin: 0 5px;
+  border-style: solid;
+  border-color: grey;
+  border-width: 4px;
+  position: relative;
+}
+
+.toggle {
+  background-color: grey;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  position: absolute;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.1s;
+  transition-property: margin-left;
+}
+
+.toggled {
+  margin-left: 30px;
+}
