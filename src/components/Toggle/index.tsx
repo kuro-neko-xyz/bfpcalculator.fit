@@ -5,14 +5,18 @@ interface ToggleProps {
   label1: string;
   label2: string;
   onChange: (value: boolean) => void;
+  value: boolean;
 }
 
-const Toggle: FC<ToggleProps> = ({ label1, label2, onChange }) => {
-  const [isToggled, setIsToggled] = useState(false);
+const Toggle: FC<ToggleProps> = ({ label1, label2, onChange, value }) => {
+  const [isToggled, setIsToggled] = useState(value);
 
   const handleChange = () => {
-    setIsToggled(!isToggled);
-    onChange(isToggled);
+    setIsToggled((prev) => {
+      const temp = !prev;
+      onChange(temp);
+      return temp;
+    });
   };
 
   return (
@@ -20,7 +24,7 @@ const Toggle: FC<ToggleProps> = ({ label1, label2, onChange }) => {
       <label>{label1}</label>
       <div className={styles.background}>
         <div
-          className={`${styles.toggle} ${isToggled ? "" : styles.toggled}`}
+          className={`${styles.toggle} ${isToggled ? styles.toggled : ""}`}
         />
       </div>
       <label>{label2}</label>
