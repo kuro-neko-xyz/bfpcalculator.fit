@@ -50,7 +50,6 @@ function App() {
 
   return (
     <div className={styles.container}>
-      event.target.
       <div className={styles.hero}>
         <h1>Body Fat Percentage Calculator</h1>
         <p>
