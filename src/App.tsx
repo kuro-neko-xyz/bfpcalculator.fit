@@ -31,6 +31,18 @@ function App() {
 
   return (
     <div className="container">
+      <div className="hero">
+        <h1>Body Fat Percentage Calculator</h1>
+        <p>
+          The U.S. Navy Body Fat Percentage (BFP) method is a widely accepted
+          and highly accessible way to estimate body composition. Developed in
+          1984 by Drs. Hodgdon and Beckett at the Naval Health Research Center,
+          this method bypasses the need for expensive clinical equipment like
+          DEXA scans or hydrostatic weighing. Instead, it relies on basic body
+          circumference measurements and a logarithmic equation to provide a
+          reliable estimate of a person's fat mass versus lean mass.
+        </p>
+      </div>
       <div className="data">
         <div className="field">
           <label>Waist (in cm)</label>
