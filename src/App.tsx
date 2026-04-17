@@ -8,7 +8,8 @@ function App() {
   const [neck, setNeck] = useState("");
   const [height, setHeight] = useState("");
   const [bfp, setBFP] = useState(0);
-  const [isFemale, setIsFemale] = useState(true);
+  const [isImperial, setIsImperial] = useState(false);
+  const [isFemale, setIsFemale] = useState(false);
 
   const filterInput = (value: string) => {
     if (value === "") {
@@ -36,15 +37,28 @@ function App() {
     height: number;
   }) => {
     if (isFemale) {
+      if (isImperial) {
+        return (
+          163.205 * Math.log10(waist + hip - neck) -
+          97.684 * Math.log10(height) -
+          78.387
+        );
+      }
       return (
         163.205 * Math.log10(waist + hip - neck) -
         97.684 * Math.log10(height) -
         104.91
       );
     } else {
-      return (
-        86.01 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 30.3
-      );
+      if (isImperial) {
+        return (
+          86.01 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76
+        );
+      } else {
+        return (
+          86.01 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 30.3
+        );
+      }
     }
   };
 
@@ -64,16 +78,25 @@ function App() {
       </div>
       <div className={styles.data}>
         <Toggle
+          label1="Metric"
+          label2="Imperial"
+          onChange={(value) => {
+            setIsImperial(value);
+          }}
+          value={isImperial}
+        />
+        <Toggle
           label1="Male"
           label2="Female"
           onChange={(value) => {
             setIsFemale(value);
           }}
+          value={isFemale}
         />
       </div>
       <div className={styles.data}>
         <div className={styles.field}>
-          <label>Waist (in cm)</label>
+          <label>Waist</label>
           <input
             value={waist}
             onChange={(e) => {
@@ -86,7 +109,7 @@ function App() {
         </div>
         {isFemale && (
           <div className={styles.field}>
-            <label>Hip (in cm)</label>
+            <label>Hip</label>
             <input
               value={hip}
               onChange={(e) => {
@@ -99,7 +122,7 @@ function App() {
           </div>
         )}
         <div className={styles.field}>
-          <label>Neck (in cm)</label>
+          <label>Neck</label>
           <input
             value={neck}
             onChange={(e) => {
@@ -111,7 +134,7 @@ function App() {
           />
         </div>
         <div className={styles.field}>
-          <label>Height (in cm)</label>
+          <label>Height</label>
           <input
             value={height}
             onChange={(e) => {
