@@ -1,11 +1,14 @@
 import { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
+import Toggle from "./components/Toggle";
 
 function App() {
   const [waist, setWaist] = useState("");
+  const [hip, setHip] = useState("");
   const [neck, setNeck] = useState("");
   const [height, setHeight] = useState("");
   const [bfp, setBFP] = useState(0);
+  const [isFemale, setIsFemale] = useState(true);
 
   const filterInput = (value: string) => {
     if (value === "") {
@@ -23,25 +26,32 @@ function App() {
 
   const calculateBFP = ({
     waist,
+    hip,
     neck,
     height,
   }: {
     waist: number;
+    hip: number;
     neck: number;
     height: number;
   }) => {
-    return (
-      495 /
-        (1.0324 -
-          0.19077 * Math.log10(waist - neck) +
-          0.15456 * Math.log10(height)) -
-      450
-    );
+    if (isFemale) {
+      return (
+        163.205 * Math.log10(waist + hip - neck) -
+        97.684 * Math.log10(height) -
+        104.91
+      );
+    } else {
+      return (
+        86.01 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 30.3
+      );
+    }
   };
 
   return (
-    <div className="container">
-      <div className="hero">
+    <div className={styles.container}>
+      event.target.
+      <div className={styles.hero}>
         <h1>Body Fat Percentage Calculator</h1>
         <p>
           The U.S. Navy Body Fat Percentage (BFP) method is a widely accepted
@@ -53,8 +63,17 @@ function App() {
           reliable estimate of a person's fat mass versus lean mass.
         </p>
       </div>
-      <div className="data">
-        <div className="field">
+      <div className={styles.data}>
+        <Toggle
+          label1="Male"
+          label2="Female"
+          onChange={(value) => {
+            setIsFemale(value);
+          }}
+        />
+      </div>
+      <div className={styles.data}>
+        <div className={styles.field}>
           <label>Waist (in cm)</label>
           <input
             value={waist}
@@ -66,7 +85,21 @@ function App() {
             }}
           />
         </div>
-        <div className="field">
+        {isFemale && (
+          <div className={styles.field}>
+            <label>Hip (in cm)</label>
+            <input
+              value={hip}
+              onChange={(e) => {
+                const value = filterInput(e.target.value);
+                if (value !== null) {
+                  setHip(value);
+                }
+              }}
+            />
+          </div>
+        )}
+        <div className={styles.field}>
           <label>Neck (in cm)</label>
           <input
             value={neck}
@@ -78,7 +111,7 @@ function App() {
             }}
           />
         </div>
-        <div className="field">
+        <div className={styles.field}>
           <label>Height (in cm)</label>
           <input
             value={height}
@@ -92,12 +125,19 @@ function App() {
         </div>
       </div>
       <button
-        className="button"
-        disabled={waist === "" || neck === "" || height === "" || neck >= waist}
+        className={styles.button}
+        disabled={
+          waist === "" ||
+          (isFemale && hip === "") ||
+          neck === "" ||
+          height === "" ||
+          Number(neck) >= Number(waist)
+        }
         onClick={() => {
           setBFP(
             calculateBFP({
               waist: Number(waist),
+              hip: Number(hip),
               neck: Number(neck),
               height: Number(height),
             }),
@@ -106,7 +146,9 @@ function App() {
       >
         Calculate
       </button>
-      {bfp > 0 && <p>BFP: {Math.round(bfp * 10) / 10}</p>}
+      {bfp > 0 && (
+        <p className={styles.result}>BFP: {Math.round(bfp * 10) / 10}</p>
+      )}
     </div>
   );
 }
