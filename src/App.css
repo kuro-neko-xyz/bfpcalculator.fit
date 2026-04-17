@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  font-family: "Chiron GoRound TC", sans-serif;
 }
 
 .container {
@@ -23,6 +24,12 @@
 
 .hero h1 {
   margin-bottom: 20px;
+  font-size: 3rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin: 0 10%;
 }
 
 .data {
@@ -41,6 +48,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.field label {
+  font-size: 1.125rem;
+  margin-bottom: 10px;
+}
+
+.field input {
+  border-style: none;
+  height: 30px;
+  border-radius: 50px;
 }
 
 .button {
