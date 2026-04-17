@@ -8,7 +8,17 @@ function App() {
   const [bfp, setBFP] = useState(0);
 
   const filterInput = (value: string) => {
-    return value.replace(/[^0-9]/g, "");
+    if (value === "") {
+      return "";
+    }
+
+    const regex = /^(?<whole>[1-9][0-9]*)(?<point>\.?)(?<decimal>[0-9]*)$/;
+    const groups = value.match(regex)?.groups;
+    if (groups) {
+      return groups.whole + groups.point + groups.decimal;
+    } else {
+      return null;
+    }
   };
 
   const calculateBFP = ({
@@ -48,21 +58,36 @@ function App() {
           <label>Waist (in cm)</label>
           <input
             value={waist}
-            onChange={(e) => setWaist(filterInput(e.target.value))}
+            onChange={(e) => {
+              const value = filterInput(e.target.value);
+              if (value !== null) {
+                setWaist(value);
+              }
+            }}
           />
         </div>
         <div className="field">
           <label>Neck (in cm)</label>
           <input
             value={neck}
-            onChange={(e) => setNeck(filterInput(e.target.value))}
+            onChange={(e) => {
+              const value = filterInput(e.target.value);
+              if (value !== null) {
+                setNeck(value);
+              }
+            }}
           />
         </div>
         <div className="field">
           <label>Height (in cm)</label>
           <input
             value={height}
-            onChange={(e) => setHeight(filterInput(e.target.value))}
+            onChange={(e) => {
+              const value = filterInput(e.target.value);
+              if (value !== null) {
+                setHeight(value);
+              }
+            }}
           />
         </div>
         <button
