@@ -16,6 +16,15 @@
   justify-content: center;
 }
 
+.hero {
+  text-align: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+}
+
 .data {
   display: flex;
   align-items: center;
