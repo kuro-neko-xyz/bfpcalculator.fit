@@ -78,8 +78,8 @@ function App() {
       </div>
       <div className={styles.data}>
         <Toggle
-          label1="Metric"
-          label2="Imperial"
+          label1="Centimeters"
+          label2="Inches"
           onChange={(value) => {
             setIsImperial(value);
           }}
