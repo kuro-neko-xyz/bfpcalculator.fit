@@ -1,15 +1,16 @@
 import { useState } from "react";
 import styles from "./App.module.css";
 import Toggle from "./components/Toggle";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const [waist, setWaist] = useState("");
   const [hip, setHip] = useState("");
   const [neck, setNeck] = useState("");
-  const [height, setHeight] = useState("");
+  const [height, setHeight] = useLocalStorage("height", "");
   const [bfp, setBFP] = useState(0);
-  const [isImperial, setIsImperial] = useState(false);
-  const [isFemale, setIsFemale] = useState(false);
+  const [isImperial, setIsImperial] = useLocalStorage("isImperial", false);
+  const [isFemale, setIsFemale] = useLocalStorage("isFemale", false);
 
   const filterInput = (value: string) => {
     if (value === "") {
