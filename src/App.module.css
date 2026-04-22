@@ -10,11 +10,17 @@
     rgba(87, 199, 133, 1) 50%,
     rgba(237, 221, 83, 1) 100%
   );
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    justify-content: start;
+  }
 }
 
 .hero {
@@ -27,9 +33,21 @@
   font-size: 3rem;
 }
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+
 .hero p {
   font-size: 1.25rem;
   margin: 0 10%;
+}
+
+@media (max-width: 768px) {
+  .hero p {
+    font-size: 1rem;
+  }
 }
 
 .data {
@@ -39,8 +57,20 @@
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .data {
+    flex-direction: column;
+  }
+}
+
 .data > * {
   margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .data > * {
+    margin-top: 0;
+  }
 }
 
 .field {
@@ -59,6 +89,7 @@
   border-style: none;
   height: 30px;
   border-radius: 50px;
+  text-align: center;
 }
 
 .button {
@@ -70,6 +101,7 @@
   padding: 0 20px;
   background-color: #00dddd;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .button:disabled {
